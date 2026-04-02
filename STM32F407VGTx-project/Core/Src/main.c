@@ -100,8 +100,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  xTaskCreate(AppTask1, pcName, usStackDepth, pvParameters, uxPriority, pxCreatedTask)
+  xTaskCreate(AppTask1, "Task1", 100, NULL, 1, NULL);
+
   vTaskStartScheduler();
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -153,6 +155,15 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void AppTask1(void * pvParameters){
+
+
+	while(1){
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
+
+		vTaskDelay(pdMS_TO_TICKS(500));
+	}
+}
 
 /* USER CODE END 4 */
 
